@@ -111,34 +111,12 @@ for i in range(0,len(pressao_intermediaria)):
     
     h6 = h5 - eficiencia_turbina*(h5 - h6s)
     
+    #Encontrar se é saturado ou superaquecido
     regiao = tabela.interpolar_mestre(p6, h6, [8, 3], 3, retornar_sat_ou_super = True) #Regiao True => Saturado; Regiao False=>Superaquecido
 
     if regiao == False:
         s6 = tabela.interpolar_mestre(p6, h6, [11, 4], 3)
-    else:       
-    
-        # 5)	Encontrar x6s (através de s5 = s6s)
-        # s6s = s_pressao_inter_liq + x6s*s_pressao_inter_evap
-        # s_liq (Posição 9) // s_evap(Posição 10)
-
-        #Verificar se é saturado ou superaquecido
-        '''sat_ou_super = tabela.interpolar_mestre(p6, s5 ) @@@@@@@@@ Travamos!!!!!!!!'''
-
-        '''s_pressao_inter_liq = tabela.interpolar_agua_saturada(p6, 9)
-        s_pressao_inter_evap = tabela.interpolar_agua_saturada(p6, 10)
-        s6s = s5
-        x6s = (s6s - s_pressao_inter_liq)/s_pressao_inter_evap'''
-
-
-        '''# 6)	Encontrar h6s
-        # h6s = h_pressao_inter_liq + x6s*h_pressao_inter_evap
-        h_pressao_inter_liq = tabela.interpolar_agua_saturada(p6, 6)
-        h_pressao_inter_evap = tabela.interpolar_agua_saturada(p6, 7)
-        h6s = h_pressao_inter_liq + x6s*h_pressao_inter_evap'''
-
-        '''# 7)	Encontrar h6 (real) pela eficiência da turbina -> eficiencia_turbina = h5 – h6/ h5 – h6s
-        h6 = h5 - eficiencia_turbina*(h5 - h6s)'''
-
+    else:           
         h_pressao_inter_liq = tabela.interpolar_agua_saturada(p6, 6)
         h_pressao_inter_evap = tabela.interpolar_agua_saturada(p6, 7)
 
@@ -172,30 +150,6 @@ for i in range(0,len(pressao_intermediaria)):
         x7 = (h7 - h_pressao_inter_liq) / h_pressao_inter_evap
         # s6 = s_pressao_inter_liq + x6s*s_pressao_inter_evap
         s7 = s_pressao_inter_liq + x7*s_pressao_inter_evap
-    
-    '''@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'''
-
-    '''    # 10) Encontrar x7s (através de s6 = s7s)
-    # s7s = s_pressao_baixa_liq + x7s*s_pressao_baixa_evap
-    # s_liq (Posição 9) // s_evap(Posição 10)
-    s_pressao_baixa_liq = tabela.interpolar_agua_saturada(p7, 9)
-    s_pressao_baixa_evap = tabela.interpolar_agua_saturada(p7, 10)
-
-    s7s = s6
-    x7s = (s7s - s_pressao_baixa_liq)/s_pressao_baixa_evap
-
-    # 10) Encontrar h7s
-    # h7s = h_pressao_baixa_liq + x6s*h_pressao_baixa_evap
-    h_pressao_baixa_liq = tabela.interpolar_agua_saturada(p7, 6)
-    h_pressao_baixa_evap = tabela.interpolar_agua_saturada(p7, 7)
-    h7s = h_pressao_baixa_liq + x7s*h_pressao_baixa_evap
-
-    # 11) Encontrar h7 (real) pela eficiência da turbina -> eficiencia_turbina = h6 – h7/ h6 – h7s
-    h7 = h6 - eficiencia_turbina*(h6 - h7s) 
-
-    # 12) Encontrar o título (real) x7 -> Saída do programa
-    x7 = (h7 - h_pressao_baixa_liq) / h_pressao_baixa_evap '''
-
 
     # 13)	Trabalho da turbina(kJ/kg) -> wt = (h5-h6) + (1-m1)*(h6 – h7)
     wt = (h5-h6) + (1-m1)*(h6 - h7)
