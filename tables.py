@@ -772,27 +772,13 @@ class Tabelas:
 
             interpol_superior_temperatura = elemento_inf_sup
 
-        #Interpolação FINAL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! (Entre pressões)
+        #Interpolação Final
 
         valor_interpolado_final = interpol_inferior_temperatura + (pressao - pressao_inferior) * (interpol_superior_temperatura - interpol_inferior_temperatura)/(pressao_superior - pressao_inferior)
            
 
         return valor_interpolado_final             
-            
 
-      
-
-
-'''
-
-for (vários regeneradores):
-    Pressão -> arbitrária
-    Entropia -> eficiencia da turbina -> chama uma função que calcula a entropia através da eficiencia da turbina
-    Temperatura -> Vem da entropia -> Chama uma função que calcula a temperatura através da entropia
-    Entalpia -> Vem da pressão e temperatura -> Chama a função interpolar_agua_superaquecida
-    
-
-'''
                 
                 
 
