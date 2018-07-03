@@ -1,2 +1,2 @@
-# regenerative-rankine
-Optimizer for a Regenerative Rankine Cycle
+# rankine-regenerativo
+Software de otimização para Ciclo Rankine Regenerativo
